@@ -23,6 +23,6 @@ export interface CreateUserRequest {
     /**
      * The server the player is from.
      */
-    server: string;
+    serverName: string;
 }
 

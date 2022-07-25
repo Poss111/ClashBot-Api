@@ -161,27 +161,27 @@ export class TeamService {
 
     /**
      * Returns a single Team or multiple Teams that match the filtering criteria.
-     * @param server the name of the Server to filter the Teams by.
+     * @param serverName the name of the Server to filter the Teams by.
      * @param name the name of the Team to retrieve.
      * @param tournament the name of the Tournament to filter the Teams by.
      * @param day the day of the Tournament to filter the Teams by.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTeam(server: string, name?: string, tournament?: string, day?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Team>>;
-    public getTeam(server: string, name?: string, tournament?: string, day?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Team>>>;
-    public getTeam(server: string, name?: string, tournament?: string, day?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Team>>>;
-    public getTeam(server: string, name?: string, tournament?: string, day?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (server === null || server === undefined) {
-            throw new Error('Required parameter server was null or undefined when calling getTeam.');
+    public getTeam(serverName: string, name?: string, tournament?: string, day?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Team>>;
+    public getTeam(serverName: string, name?: string, tournament?: string, day?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Team>>>;
+    public getTeam(serverName: string, name?: string, tournament?: string, day?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Team>>>;
+    public getTeam(serverName: string, name?: string, tournament?: string, day?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (serverName === null || serverName === undefined) {
+            throw new Error('Required parameter serverName was null or undefined when calling getTeam.');
         }
 
         let localVarHeaders = this.defaultHeaders;
         if (name !== undefined && name !== null) {
             localVarHeaders = localVarHeaders.set('name', String(name));
         }
-        if (server !== undefined && server !== null) {
-            localVarHeaders = localVarHeaders.set('server', String(server));
+        if (serverName !== undefined && serverName !== null) {
+            localVarHeaders = localVarHeaders.set('serverName', String(serverName));
         }
         if (tournament !== undefined && tournament !== null) {
             localVarHeaders = localVarHeaders.set('tournament', String(tournament));
