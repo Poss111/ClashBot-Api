@@ -21,10 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { CreateNewTeamRequest } from '../model/createNewTeamRequest';
 // @ts-ignore
-import { RemovePlayerFromTeam200Response } from '../model/removePlayerFromTeam200Response';
-// @ts-ignore
-import { RemovePlayerFromTeamRequest } from '../model/removePlayerFromTeamRequest';
-// @ts-ignore
 import { Team } from '../model/team';
 // @ts-ignore
 import { UpdateTeamRequest } from '../model/updateTeamRequest';
@@ -176,19 +172,25 @@ export class TeamService {
             throw new Error('Required parameter server was null or undefined when calling getTeam.');
         }
 
-        let localVarHeaders = this.defaultHeaders;
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (name !== undefined && name !== null) {
-            localVarHeaders = localVarHeaders.set('name', String(name));
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>name, 'name');
         }
         if (server !== undefined && server !== null) {
-            localVarHeaders = localVarHeaders.set('server', String(server));
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>server, 'server');
         }
         if (tournament !== undefined && tournament !== null) {
-            localVarHeaders = localVarHeaders.set('tournament', String(tournament));
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>tournament, 'tournament');
         }
         if (day !== undefined && day !== null) {
-            localVarHeaders = localVarHeaders.set('day', String(day));
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>day, 'day');
         }
+
+        let localVarHeaders = this.defaultHeaders;
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -222,6 +224,7 @@ export class TeamService {
         return this.httpClient.get<Array<Team>>(`${this.configuration.basePath}/team`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -233,14 +236,55 @@ export class TeamService {
 
     /**
      * Removes a Player from a Team
-     * @param removePlayerFromTeamRequest Payload necessary to remove a player from a Team.
+     * @param name the name of the Team to retrieve.
+     * @param serverName the name of the Server to filter the Teams by.
+     * @param tournament the name of the Tournament to filter the Teams by.
+     * @param tournamentDay the day of the Tournament to filter the Teams by.
+     * @param playerId the player id to remove from the Team.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removePlayerFromTeam(removePlayerFromTeamRequest?: RemovePlayerFromTeamRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<RemovePlayerFromTeam200Response>;
-    public removePlayerFromTeam(removePlayerFromTeamRequest?: RemovePlayerFromTeamRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<RemovePlayerFromTeam200Response>>;
-    public removePlayerFromTeam(removePlayerFromTeamRequest?: RemovePlayerFromTeamRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<RemovePlayerFromTeam200Response>>;
-    public removePlayerFromTeam(removePlayerFromTeamRequest?: RemovePlayerFromTeamRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public removePlayerFromTeam(name: string, serverName: string, tournament: string, tournamentDay: string, playerId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Team>;
+    public removePlayerFromTeam(name: string, serverName: string, tournament: string, tournamentDay: string, playerId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Team>>;
+    public removePlayerFromTeam(name: string, serverName: string, tournament: string, tournamentDay: string, playerId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Team>>;
+    public removePlayerFromTeam(name: string, serverName: string, tournament: string, tournamentDay: string, playerId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (name === null || name === undefined) {
+            throw new Error('Required parameter name was null or undefined when calling removePlayerFromTeam.');
+        }
+        if (serverName === null || serverName === undefined) {
+            throw new Error('Required parameter serverName was null or undefined when calling removePlayerFromTeam.');
+        }
+        if (tournament === null || tournament === undefined) {
+            throw new Error('Required parameter tournament was null or undefined when calling removePlayerFromTeam.');
+        }
+        if (tournamentDay === null || tournamentDay === undefined) {
+            throw new Error('Required parameter tournamentDay was null or undefined when calling removePlayerFromTeam.');
+        }
+        if (playerId === null || playerId === undefined) {
+            throw new Error('Required parameter playerId was null or undefined when calling removePlayerFromTeam.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (name !== undefined && name !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>name, 'name');
+        }
+        if (serverName !== undefined && serverName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>serverName, 'serverName');
+        }
+        if (tournament !== undefined && tournament !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>tournament, 'tournament');
+        }
+        if (tournamentDay !== undefined && tournamentDay !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>tournamentDay, 'tournamentDay');
+        }
+        if (playerId !== undefined && playerId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>playerId, 'playerId');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -262,15 +306,6 @@ export class TeamService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -282,9 +317,10 @@ export class TeamService {
             }
         }
 
-        return this.httpClient.delete<RemovePlayerFromTeam200Response>(`${this.configuration.basePath}/team`,
+        return this.httpClient.delete<Team>(`${this.configuration.basePath}/team`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

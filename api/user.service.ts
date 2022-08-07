@@ -19,13 +19,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { AddToListOfPreferredChampionsRequest } from '../model/addToListOfPreferredChampionsRequest';
+// @ts-ignore
 import { CreateNewListOfPreferredChampionsRequest } from '../model/createNewListOfPreferredChampionsRequest';
 // @ts-ignore
 import { CreateUserRequest } from '../model/createUserRequest';
 // @ts-ignore
 import { Player } from '../model/player';
-// @ts-ignore
-import { RemoveFromListOfPreferredChampionsRequest } from '../model/removeFromListOfPreferredChampionsRequest';
 // @ts-ignore
 import { Subscription } from '../model/subscription';
 
@@ -98,14 +98,14 @@ export class UserService {
     /**
      * Adds the requested champion to the users preferred champions. Cannot be greater than a length of 5.
      * @param id The Clash bot Player\&#39;s id
-     * @param removeFromListOfPreferredChampionsRequest A League of Legends Champion to updated or remove with.
+     * @param addToListOfPreferredChampionsRequest A League of Legends Champion to updated or remove with.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addToListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public addToListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public addToListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public addToListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public addToListOfPreferredChampions(id: string, addToListOfPreferredChampionsRequest?: AddToListOfPreferredChampionsRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public addToListOfPreferredChampions(id: string, addToListOfPreferredChampionsRequest?: AddToListOfPreferredChampionsRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public addToListOfPreferredChampions(id: string, addToListOfPreferredChampionsRequest?: AddToListOfPreferredChampionsRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public addToListOfPreferredChampions(id: string, addToListOfPreferredChampionsRequest?: AddToListOfPreferredChampionsRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling addToListOfPreferredChampions.');
         }
@@ -151,7 +151,7 @@ export class UserService {
         }
 
         return this.httpClient.patch<Array<string>>(`${this.configuration.basePath}/user/${encodeURIComponent(String(id))}/champions`,
-            removeFromListOfPreferredChampionsRequest,
+            addToListOfPreferredChampionsRequest,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -309,10 +309,13 @@ export class UserService {
             throw new Error('Required parameter id was null or undefined when calling getUser.');
         }
 
-        let localVarHeaders = this.defaultHeaders;
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (id !== undefined && id !== null) {
-            localVarHeaders = localVarHeaders.set('id', String(id));
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
         }
+
+        let localVarHeaders = this.defaultHeaders;
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -346,6 +349,7 @@ export class UserService {
         return this.httpClient.get<Player>(`${this.configuration.basePath}/user`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -358,16 +362,25 @@ export class UserService {
     /**
      * Removes the requested champion to the users preferred champions.
      * @param id The Clash bot Player\&#39;s id
-     * @param removeFromListOfPreferredChampionsRequest A League of Legends Champion to updated or remove with.
+     * @param champion the champion name to remove from the user\&#39;s list of champions
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removeFromListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public removeFromListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public removeFromListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public removeFromListOfPreferredChampions(id: string, removeFromListOfPreferredChampionsRequest?: RemoveFromListOfPreferredChampionsRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public removeFromListOfPreferredChampions(id: string, champion: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public removeFromListOfPreferredChampions(id: string, champion: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public removeFromListOfPreferredChampions(id: string, champion: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public removeFromListOfPreferredChampions(id: string, champion: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling removeFromListOfPreferredChampions.');
+        }
+        if (champion === null || champion === undefined) {
+            throw new Error('Required parameter champion was null or undefined when calling removeFromListOfPreferredChampions.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (champion !== undefined && champion !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>champion, 'champion');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -390,15 +403,6 @@ export class UserService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -413,6 +417,7 @@ export class UserService {
         return this.httpClient.delete<Array<string>>(`${this.configuration.basePath}/user/${encodeURIComponent(String(id))}/champions`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -229,14 +229,47 @@ export class TentativeService {
 
     /**
      * Remove a player from the tentative queue for an upcoming Tournament.
-     * @param placePlayerOnTentativeRequest Parameters to place a Player into the tentative queue
+     * @param serverName the name of the Server the queue falls under.
+     * @param playerId the player id to remove from the tentative queue with.
+     * @param tournament the Tournament that the tentative queue belongs to.
+     * @param tournamentDay the Tournament day that the tentative queue belongs to.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removePlayerFromTentative(placePlayerOnTentativeRequest?: PlacePlayerOnTentativeRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Tentative>;
-    public removePlayerFromTentative(placePlayerOnTentativeRequest?: PlacePlayerOnTentativeRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Tentative>>;
-    public removePlayerFromTentative(placePlayerOnTentativeRequest?: PlacePlayerOnTentativeRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Tentative>>;
-    public removePlayerFromTentative(placePlayerOnTentativeRequest?: PlacePlayerOnTentativeRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public removePlayerFromTentative(serverName: string, playerId: string, tournament: string, tournamentDay: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Tentative>;
+    public removePlayerFromTentative(serverName: string, playerId: string, tournament: string, tournamentDay: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Tentative>>;
+    public removePlayerFromTentative(serverName: string, playerId: string, tournament: string, tournamentDay: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Tentative>>;
+    public removePlayerFromTentative(serverName: string, playerId: string, tournament: string, tournamentDay: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (serverName === null || serverName === undefined) {
+            throw new Error('Required parameter serverName was null or undefined when calling removePlayerFromTentative.');
+        }
+        if (playerId === null || playerId === undefined) {
+            throw new Error('Required parameter playerId was null or undefined when calling removePlayerFromTentative.');
+        }
+        if (tournament === null || tournament === undefined) {
+            throw new Error('Required parameter tournament was null or undefined when calling removePlayerFromTentative.');
+        }
+        if (tournamentDay === null || tournamentDay === undefined) {
+            throw new Error('Required parameter tournamentDay was null or undefined when calling removePlayerFromTentative.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (serverName !== undefined && serverName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>serverName, 'serverName');
+        }
+        if (playerId !== undefined && playerId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>playerId, 'playerId');
+        }
+        if (tournament !== undefined && tournament !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>tournament, 'tournament');
+        }
+        if (tournamentDay !== undefined && tournamentDay !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>tournamentDay, 'tournamentDay');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -258,15 +291,6 @@ export class TentativeService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -281,6 +305,7 @@ export class TentativeService {
         return this.httpClient.delete<Tentative>(`${this.configuration.basePath}/tentative`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

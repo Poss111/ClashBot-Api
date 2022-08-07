@@ -1,11 +1,11 @@
 {
   "name": "clash-bot-service-api",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "OpenAPI client for clash-bot-service-api",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    "url": "https://github.com/Poss111/ClashBot-Api.git"
   },
   "keywords": [
     "openapi-client",
