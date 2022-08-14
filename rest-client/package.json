@@ -9,6 +9,14 @@
     "prepare": "npm run build",
     "test": "mocha --require @babel/register --recursive"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Poss111/ClashBot-Api.git"
+  },
+  "keywords": [
+    "openapi-client",
+    "openapi-generator"
+  ],
   "browser": {
     "fs": false
   },
