@@ -67,13 +67,13 @@ then install it via:
 
 The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
 the above steps with Node.js and installing browserify with `npm install -g browserify`,
-perform the following (assuming _main.js_ is your entry file):
+perform the following (assuming *main.js* is your entry file):
 
 ```shell
 browserify main.js > bundle.js
 ```
 
-Then include _bundle.js_ in the HTML pages.
+Then include *bundle.js* in the HTML pages.
 
 ### Webpack Configuration
 
@@ -86,10 +86,10 @@ module: {
   rules: [
     {
       parser: {
-        amd: false,
-      },
-    },
-  ];
+        amd: false
+      }
+    }
+  ]
 }
 ```
 
@@ -100,61 +100,63 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```javascript
 var ClashBotRestClient = require('clash-bot-rest-client');
 
-var api = new ClashBotRestClient.SREApi();
-var callback = function (error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getApplicationHealth(callback);
+
+var api = new ClashBotRestClient.SREApi()
+api.getApplicationHealth().then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to _http://localhost:8080/api/v2_
+All URIs are relative to *http://localhost:8080/api/v2*
 
-| Class                              | Method                                                                                           | HTTP request                        | Description |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------- | ----------- |
-| _ClashBotRestClient.SREApi_        | [**getApplicationHealth**](docs/SREApi.md#getApplicationHealth)                                  | **GET** /health                     |
-| _ClashBotRestClient.TeamApi_       | [**createNewTeam**](docs/TeamApi.md#createNewTeam)                                               | **POST** /team                      |
-| _ClashBotRestClient.TeamApi_       | [**getTeam**](docs/TeamApi.md#getTeam)                                                           | **GET** /team                       |
-| _ClashBotRestClient.TeamApi_       | [**removePlayerFromTeam**](docs/TeamApi.md#removePlayerFromTeam)                                 | **DELETE** /team                    |
-| _ClashBotRestClient.TeamApi_       | [**updateTeam**](docs/TeamApi.md#updateTeam)                                                     | **PATCH** /team                     |
-| _ClashBotRestClient.TentativeApi_  | [**getTentativeDetails**](docs/TentativeApi.md#getTentativeDetails)                              | **GET** /tentative                  |
-| _ClashBotRestClient.TentativeApi_  | [**placePlayerOnTentative**](docs/TentativeApi.md#placePlayerOnTentative)                        | **POST** /tentative                 |
-| _ClashBotRestClient.TentativeApi_  | [**removePlayerFromTentative**](docs/TentativeApi.md#removePlayerFromTentative)                  | **DELETE** /tentative               |
-| _ClashBotRestClient.TournamentApi_ | [**getTournaments**](docs/TournamentApi.md#getTournaments)                                       | **GET** /tournaments                |
-| _ClashBotRestClient.UserApi_       | [**addToListOfPreferredChampions**](docs/UserApi.md#addToListOfPreferredChampions)               | **PATCH** /user/{id}/champions      |
-| _ClashBotRestClient.UserApi_       | [**createNewListOfPreferredChampions**](docs/UserApi.md#createNewListOfPreferredChampions)       | **POST** /user/{id}/champions       |
-| _ClashBotRestClient.UserApi_       | [**createUser**](docs/UserApi.md#createUser)                                                     | **POST** /user                      |
-| _ClashBotRestClient.UserApi_       | [**getUser**](docs/UserApi.md#getUser)                                                           | **GET** /user                       |
-| _ClashBotRestClient.UserApi_       | [**removeFromListOfPreferredChampions**](docs/UserApi.md#removeFromListOfPreferredChampions)     | **DELETE** /user/{id}/champions     |
-| _ClashBotRestClient.UserApi_       | [**retrieveListOfUserPreferredChampions**](docs/UserApi.md#retrieveListOfUserPreferredChampions) | **GET** /user/{id}/champions        |
-| _ClashBotRestClient.UserApi_       | [**retrieveUserSubscriptions**](docs/UserApi.md#retrieveUserSubscriptions)                       | **GET** /user/{id}/subscriptions    |
-| _ClashBotRestClient.UserApi_       | [**subscribeUser**](docs/UserApi.md#subscribeUser)                                               | **POST** /user/{id}/subscriptions   |
-| _ClashBotRestClient.UserApi_       | [**unsubscribeUser**](docs/UserApi.md#unsubscribeUser)                                           | **DELETE** /user/{id}/subscriptions |
-| _ClashBotRestClient.UserApi_       | [**updateUser**](docs/UserApi.md#updateUser)                                                     | **PATCH** /user                     |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*ClashBotRestClient.SREApi* | [**getApplicationHealth**](docs/SREApi.md#getApplicationHealth) | **GET** /health | 
+*ClashBotRestClient.TeamApi* | [**createNewTeam**](docs/TeamApi.md#createNewTeam) | **POST** /team | 
+*ClashBotRestClient.TeamApi* | [**getTeam**](docs/TeamApi.md#getTeam) | **GET** /team | 
+*ClashBotRestClient.TeamApi* | [**removePlayerFromTeam**](docs/TeamApi.md#removePlayerFromTeam) | **DELETE** /team | 
+*ClashBotRestClient.TeamApi* | [**updateTeam**](docs/TeamApi.md#updateTeam) | **PATCH** /team | 
+*ClashBotRestClient.TentativeApi* | [**getTentativeDetails**](docs/TentativeApi.md#getTentativeDetails) | **GET** /tentative | 
+*ClashBotRestClient.TentativeApi* | [**placePlayerOnTentative**](docs/TentativeApi.md#placePlayerOnTentative) | **POST** /tentative | 
+*ClashBotRestClient.TentativeApi* | [**removePlayerFromTentative**](docs/TentativeApi.md#removePlayerFromTentative) | **DELETE** /tentative | 
+*ClashBotRestClient.TournamentApi* | [**getTournaments**](docs/TournamentApi.md#getTournaments) | **GET** /tournaments | 
+*ClashBotRestClient.UserApi* | [**addToListOfPreferredChampions**](docs/UserApi.md#addToListOfPreferredChampions) | **PATCH** /user/{id}/champions | 
+*ClashBotRestClient.UserApi* | [**createNewListOfPreferredChampions**](docs/UserApi.md#createNewListOfPreferredChampions) | **POST** /user/{id}/champions | 
+*ClashBotRestClient.UserApi* | [**createUser**](docs/UserApi.md#createUser) | **POST** /user | 
+*ClashBotRestClient.UserApi* | [**getUser**](docs/UserApi.md#getUser) | **GET** /user | 
+*ClashBotRestClient.UserApi* | [**removeFromListOfPreferredChampions**](docs/UserApi.md#removeFromListOfPreferredChampions) | **DELETE** /user/{id}/champions | 
+*ClashBotRestClient.UserApi* | [**retrieveListOfUserPreferredChampions**](docs/UserApi.md#retrieveListOfUserPreferredChampions) | **GET** /user/{id}/champions | 
+*ClashBotRestClient.UserApi* | [**retrieveUserSubscriptions**](docs/UserApi.md#retrieveUserSubscriptions) | **GET** /user/{id}/subscriptions | 
+*ClashBotRestClient.UserApi* | [**subscribeUser**](docs/UserApi.md#subscribeUser) | **POST** /user/{id}/subscriptions | 
+*ClashBotRestClient.UserApi* | [**unsubscribeUser**](docs/UserApi.md#unsubscribeUser) | **DELETE** /user/{id}/subscriptions | 
+*ClashBotRestClient.UserApi* | [**updateUser**](docs/UserApi.md#updateUser) | **PATCH** /user | 
+
 
 ## Documentation for Models
 
-- [ClashBotRestClient.AddToListOfPreferredChampionsRequest](docs/AddToListOfPreferredChampionsRequest.md)
-- [ClashBotRestClient.CreateNewListOfPreferredChampionsRequest](docs/CreateNewListOfPreferredChampionsRequest.md)
-- [ClashBotRestClient.CreateNewTeamRequest](docs/CreateNewTeamRequest.md)
-- [ClashBotRestClient.CreateNewTeamRequestPlayerDetails](docs/CreateNewTeamRequestPlayerDetails.md)
-- [ClashBotRestClient.CreateUserRequest](docs/CreateUserRequest.md)
-- [ClashBotRestClient.Error](docs/Error.md)
-- [ClashBotRestClient.GetApplicationHealth200Response](docs/GetApplicationHealth200Response.md)
-- [ClashBotRestClient.PlacePlayerOnTentativeRequest](docs/PlacePlayerOnTentativeRequest.md)
-- [ClashBotRestClient.Player](docs/Player.md)
-- [ClashBotRestClient.Role](docs/Role.md)
-- [ClashBotRestClient.Subscription](docs/Subscription.md)
-- [ClashBotRestClient.Team](docs/Team.md)
-- [ClashBotRestClient.TeamPlayerDetails](docs/TeamPlayerDetails.md)
-- [ClashBotRestClient.Tentative](docs/Tentative.md)
-- [ClashBotRestClient.Tournament](docs/Tournament.md)
-- [ClashBotRestClient.UpdateTeamRequest](docs/UpdateTeamRequest.md)
+ - [ClashBotRestClient.AddToListOfPreferredChampionsRequest](docs/AddToListOfPreferredChampionsRequest.md)
+ - [ClashBotRestClient.CreateNewListOfPreferredChampionsRequest](docs/CreateNewListOfPreferredChampionsRequest.md)
+ - [ClashBotRestClient.CreateNewTeamRequest](docs/CreateNewTeamRequest.md)
+ - [ClashBotRestClient.CreateNewTeamRequestPlayerDetails](docs/CreateNewTeamRequestPlayerDetails.md)
+ - [ClashBotRestClient.CreateUserRequest](docs/CreateUserRequest.md)
+ - [ClashBotRestClient.Error](docs/Error.md)
+ - [ClashBotRestClient.GetApplicationHealth200Response](docs/GetApplicationHealth200Response.md)
+ - [ClashBotRestClient.PlacePlayerOnTentativeRequest](docs/PlacePlayerOnTentativeRequest.md)
+ - [ClashBotRestClient.Player](docs/Player.md)
+ - [ClashBotRestClient.Role](docs/Role.md)
+ - [ClashBotRestClient.Subscription](docs/Subscription.md)
+ - [ClashBotRestClient.Team](docs/Team.md)
+ - [ClashBotRestClient.TeamPlayerDetails](docs/TeamPlayerDetails.md)
+ - [ClashBotRestClient.Tentative](docs/Tentative.md)
+ - [ClashBotRestClient.Tournament](docs/Tournament.md)
+ - [ClashBotRestClient.UpdateTeamRequest](docs/UpdateTeamRequest.md)
+
 
 ## Documentation for Authorization
 

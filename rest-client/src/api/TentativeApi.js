@@ -36,13 +36,6 @@ export default class TentativeApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the getTentativeDetails operation.
-     * @callback module:api/TentativeApi~getTentativeDetailsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Tentative>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * A list of people on the tentative queue for upcoming Tournaments.
@@ -50,10 +43,9 @@ export default class TentativeApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.tournamentName The Tournament name to filter by.
      * @param {String} opts.tournamentDay The Tournament day to filter by.
-     * @param {module:api/TentativeApi~getTentativeDetailsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Tentative>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Tentative>} and HTTP response
      */
-    getTentativeDetails(serverName, opts, callback) {
+    getTentativeDetailsWithHttpInfo(serverName, opts) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'serverName' is set
@@ -80,26 +72,33 @@ export default class TentativeApi {
       return this.apiClient.callApi(
         '/tentative', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the placePlayerOnTentative operation.
-     * @callback module:api/TentativeApi~placePlayerOnTentativeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Tentative} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * A list of people on the tentative queue for upcoming Tournaments.
+     * @param {String} serverName The Server to filter the tentative queue by.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.tournamentName The Tournament name to filter by.
+     * @param {String} opts.tournamentDay The Tournament day to filter by.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Tentative>}
      */
+    getTentativeDetails(serverName, opts) {
+      return this.getTentativeDetailsWithHttpInfo(serverName, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Places a player on the tentative queue for an upcoming Tournament.
      * @param {Object} opts Optional parameters
      * @param {module:model/PlacePlayerOnTentativeRequest} opts.placePlayerOnTentativeRequest Parameters to place a Player into the tentative queue
-     * @param {module:api/TentativeApi~placePlayerOnTentativeCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Tentative}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Tentative} and HTTP response
      */
-    placePlayerOnTentative(opts, callback) {
+    placePlayerOnTentativeWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['placePlayerOnTentativeRequest'];
 
@@ -119,17 +118,23 @@ export default class TentativeApi {
       return this.apiClient.callApi(
         '/tentative', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the removePlayerFromTentative operation.
-     * @callback module:api/TentativeApi~removePlayerFromTentativeCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Tentative} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Places a player on the tentative queue for an upcoming Tournament.
+     * @param {Object} opts Optional parameters
+     * @param {module:model/PlacePlayerOnTentativeRequest} opts.placePlayerOnTentativeRequest Parameters to place a Player into the tentative queue
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Tentative}
      */
+    placePlayerOnTentative(opts) {
+      return this.placePlayerOnTentativeWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Remove a player from the tentative queue for an upcoming Tournament.
@@ -137,10 +142,9 @@ export default class TentativeApi {
      * @param {String} playerId the player id to remove from the tentative queue with.
      * @param {String} tournament the Tournament that the tentative queue belongs to.
      * @param {String} tournamentDay the Tournament day that the tentative queue belongs to.
-     * @param {module:api/TentativeApi~removePlayerFromTentativeCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Tentative}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Tentative} and HTTP response
      */
-    removePlayerFromTentative(serverName, playerId, tournament, tournamentDay, callback) {
+    removePlayerFromTentativeWithHttpInfo(serverName, playerId, tournament, tournamentDay) {
       let postBody = null;
       // verify the required parameter 'serverName' is set
       if (serverName === undefined || serverName === null) {
@@ -179,8 +183,23 @@ export default class TentativeApi {
       return this.apiClient.callApi(
         '/tentative', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * Remove a player from the tentative queue for an upcoming Tournament.
+     * @param {String} serverName the name of the Server the queue falls under.
+     * @param {String} playerId the player id to remove from the tentative queue with.
+     * @param {String} tournament the Tournament that the tentative queue belongs to.
+     * @param {String} tournamentDay the Tournament day that the tentative queue belongs to.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Tentative}
+     */
+    removePlayerFromTentative(serverName, playerId, tournament, tournamentDay) {
+      return this.removePlayerFromTentativeWithHttpInfo(serverName, playerId, tournament, tournamentDay)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

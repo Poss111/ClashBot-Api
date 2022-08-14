@@ -39,23 +39,15 @@ export default class UserApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the addToListOfPreferredChampions operation.
-     * @callback module:api/UserApi~addToListOfPreferredChampionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<String>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Adds the requested champion to the users preferred champions. Cannot be greater than a length of 5.
      * @param {String} id The Clash bot Player's id
      * @param {Object} opts Optional parameters
      * @param {module:model/AddToListOfPreferredChampionsRequest} opts.addToListOfPreferredChampionsRequest A League of Legends Champion to updated or remove with.
-     * @param {module:api/UserApi~addToListOfPreferredChampionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<String>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<String>} and HTTP response
      */
-    addToListOfPreferredChampions(id, opts, callback) {
+    addToListOfPreferredChampionsWithHttpInfo(id, opts) {
       opts = opts || {};
       let postBody = opts['addToListOfPreferredChampionsRequest'];
       // verify the required parameter 'id' is set
@@ -80,27 +72,33 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/champions', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the createNewListOfPreferredChampions operation.
-     * @callback module:api/UserApi~createNewListOfPreferredChampionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<String>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Adds the requested champion to the users preferred champions. Cannot be greater than a length of 5.
+     * @param {String} id The Clash bot Player's id
+     * @param {Object} opts Optional parameters
+     * @param {module:model/AddToListOfPreferredChampionsRequest} opts.addToListOfPreferredChampionsRequest A League of Legends Champion to updated or remove with.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<String>}
      */
+    addToListOfPreferredChampions(id, opts) {
+      return this.addToListOfPreferredChampionsWithHttpInfo(id, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Updates the users preferred champions with an entirely new list. Cannot be greater than a length of 5.
      * @param {String} id The Clash bot Player's id
      * @param {Object} opts Optional parameters
      * @param {module:model/CreateNewListOfPreferredChampionsRequest} opts.createNewListOfPreferredChampionsRequest A list of champions.
-     * @param {module:api/UserApi~createNewListOfPreferredChampionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<String>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<String>} and HTTP response
      */
-    createNewListOfPreferredChampions(id, opts, callback) {
+    createNewListOfPreferredChampionsWithHttpInfo(id, opts) {
       opts = opts || {};
       let postBody = opts['createNewListOfPreferredChampionsRequest'];
       // verify the required parameter 'id' is set
@@ -125,26 +123,32 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/champions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the createUser operation.
-     * @callback module:api/UserApi~createUserCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Player} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Updates the users preferred champions with an entirely new list. Cannot be greater than a length of 5.
+     * @param {String} id The Clash bot Player's id
+     * @param {Object} opts Optional parameters
+     * @param {module:model/CreateNewListOfPreferredChampionsRequest} opts.createNewListOfPreferredChampionsRequest A list of champions.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<String>}
      */
+    createNewListOfPreferredChampions(id, opts) {
+      return this.createNewListOfPreferredChampionsWithHttpInfo(id, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create a new Clash Bot Player.
      * @param {Object} opts Optional parameters
      * @param {module:model/CreateUserRequest} opts.createUserRequest All necessary parameters to create a new Player
-     * @param {module:api/UserApi~createUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Player}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Player} and HTTP response
      */
-    createUser(opts, callback) {
+    createUserWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['createUserRequest'];
 
@@ -164,25 +168,30 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the getUser operation.
-     * @callback module:api/UserApi~getUserCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Player} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Create a new Clash Bot Player.
+     * @param {Object} opts Optional parameters
+     * @param {module:model/CreateUserRequest} opts.createUserRequest All necessary parameters to create a new Player
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Player}
      */
+    createUser(opts) {
+      return this.createUserWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Retrieve a Clash Bot Player Details
      * @param {String} id The id of the user to retrieve.
-     * @param {module:api/UserApi~getUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Player}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Player} and HTTP response
      */
-    getUser(id, callback) {
+    getUserWithHttpInfo(id) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -206,26 +215,30 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the removeFromListOfPreferredChampions operation.
-     * @callback module:api/UserApi~removeFromListOfPreferredChampionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<String>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Retrieve a Clash Bot Player Details
+     * @param {String} id The id of the user to retrieve.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Player}
      */
+    getUser(id) {
+      return this.getUserWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Removes the requested champion to the users preferred champions.
      * @param {String} id The Clash bot Player's id
      * @param {String} champion the champion name to remove from the user's list of champions
-     * @param {module:api/UserApi~removeFromListOfPreferredChampionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<String>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<String>} and HTTP response
      */
-    removeFromListOfPreferredChampions(id, champion, callback) {
+    removeFromListOfPreferredChampionsWithHttpInfo(id, champion) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -254,25 +267,30 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/champions', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the retrieveListOfUserPreferredChampions operation.
-     * @callback module:api/UserApi~retrieveListOfUserPreferredChampionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<String>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Removes the requested champion to the users preferred champions.
+     * @param {String} id The Clash bot Player's id
+     * @param {String} champion the champion name to remove from the user's list of champions
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<String>}
      */
+    removeFromListOfPreferredChampions(id, champion) {
+      return this.removeFromListOfPreferredChampionsWithHttpInfo(id, champion)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Returns a list of preferred champions that the User has.
      * @param {String} id The Clash bot Player's id
-     * @param {module:api/UserApi~retrieveListOfUserPreferredChampionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<String>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<String>} and HTTP response
      */
-    retrieveListOfUserPreferredChampions(id, callback) {
+    retrieveListOfUserPreferredChampionsWithHttpInfo(id) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -296,25 +314,29 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/champions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the retrieveUserSubscriptions operation.
-     * @callback module:api/UserApi~retrieveUserSubscriptionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Subscription>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Returns a list of preferred champions that the User has.
+     * @param {String} id The Clash bot Player's id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<String>}
      */
+    retrieveListOfUserPreferredChampions(id) {
+      return this.retrieveListOfUserPreferredChampionsWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Returns if the user is subscribed to receive Monday morning Discord DMs.
      * @param {String} id The Clash bot Player's id
-     * @param {module:api/UserApi~retrieveUserSubscriptionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Subscription>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Subscription>} and HTTP response
      */
-    retrieveUserSubscriptions(id, callback) {
+    retrieveUserSubscriptionsWithHttpInfo(id) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -338,25 +360,29 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/subscriptions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the subscribeUser operation.
-     * @callback module:api/UserApi~subscribeUserCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Subscription>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Returns if the user is subscribed to receive Monday morning Discord DMs.
+     * @param {String} id The Clash bot Player's id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Subscription>}
      */
+    retrieveUserSubscriptions(id) {
+      return this.retrieveUserSubscriptionsWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Adds user to Monday morning subscription
      * @param {String} id The Clash bot Player's id
-     * @param {module:api/UserApi~subscribeUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Subscription>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Subscription>} and HTTP response
      */
-    subscribeUser(id, callback) {
+    subscribeUserWithHttpInfo(id) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -380,25 +406,29 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/subscriptions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the unsubscribeUser operation.
-     * @callback module:api/UserApi~unsubscribeUserCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Subscription>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Adds user to Monday morning subscription
+     * @param {String} id The Clash bot Player's id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Subscription>}
      */
+    subscribeUser(id) {
+      return this.subscribeUserWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Removes user from Monday morning subscription.
      * @param {String} id The Clash bot Player's id
-     * @param {module:api/UserApi~unsubscribeUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Subscription>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Subscription>} and HTTP response
      */
-    unsubscribeUser(id, callback) {
+    unsubscribeUserWithHttpInfo(id) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -422,26 +452,30 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user/{id}/subscriptions', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the updateUser operation.
-     * @callback module:api/UserApi~updateUserCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Player} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Removes user from Monday morning subscription.
+     * @param {String} id The Clash bot Player's id
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Subscription>}
      */
+    unsubscribeUser(id) {
+      return this.unsubscribeUserWithHttpInfo(id)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Update an existing Clash Bot Player.
      * @param {Object} opts Optional parameters
      * @param {module:model/CreateUserRequest} opts.createUserRequest All necessary parameters to create a new Player
-     * @param {module:api/UserApi~updateUserCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Player}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Player} and HTTP response
      */
-    updateUser(opts, callback) {
+    updateUserWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['createUserRequest'];
 
@@ -461,8 +495,21 @@ export default class UserApi {
       return this.apiClient.callApi(
         '/user', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * Update an existing Clash Bot Player.
+     * @param {Object} opts Optional parameters
+     * @param {module:model/CreateUserRequest} opts.createUserRequest All necessary parameters to create a new Player
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Player}
+     */
+    updateUser(opts) {
+      return this.updateUserWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

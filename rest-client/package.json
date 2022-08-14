@@ -1,6 +1,6 @@
 {
   "name": "clash-bot-rest-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clash Bot Webapp Service to support League of Legends Clash tournament scheduling with Discord",
   "license": "Apache 2.0",
   "main": "dist/index.js",
@@ -9,14 +9,6 @@
     "prepare": "npm run build",
     "test": "mocha --require @babel/register --recursive"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Poss111/ClashBot-Api.git"
-  },
-  "keywords": [
-    "openapi-client",
-    "openapi-generator"
-  ],
   "browser": {
     "fs": false
   },

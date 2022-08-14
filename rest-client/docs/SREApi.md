@@ -20,13 +20,12 @@ Method | HTTP request | Description
 import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.SREApi();
-apiInstance.getApplicationHealth((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.getApplicationHealth().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

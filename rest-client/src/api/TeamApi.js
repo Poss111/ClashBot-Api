@@ -37,22 +37,14 @@ export default class TeamApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the createNewTeam operation.
-     * @callback module:api/TeamApi~createNewTeamCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Team} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Create a new Team
      * @param {Object} opts Optional parameters
      * @param {module:model/CreateNewTeamRequest} opts.createNewTeamRequest All necessary parameters to create a Clash Bot League of Legends Clash Team
-     * @param {module:api/TeamApi~createNewTeamCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Team}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Team} and HTTP response
      */
-    createNewTeam(opts, callback) {
+    createNewTeamWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['createNewTeamRequest'];
 
@@ -72,17 +64,23 @@ export default class TeamApi {
       return this.apiClient.callApi(
         '/team', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the getTeam operation.
-     * @callback module:api/TeamApi~getTeamCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Team>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Create a new Team
+     * @param {Object} opts Optional parameters
+     * @param {module:model/CreateNewTeamRequest} opts.createNewTeamRequest All necessary parameters to create a Clash Bot League of Legends Clash Team
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Team}
      */
+    createNewTeam(opts) {
+      return this.createNewTeamWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Returns a single Team or multiple Teams that match the filtering criteria.
@@ -91,10 +89,9 @@ export default class TeamApi {
      * @param {String} opts.name the name of the Team to retrieve.
      * @param {String} opts.tournament the name of the Tournament to filter the Teams by.
      * @param {String} opts.day the day of the Tournament to filter the Teams by.
-     * @param {module:api/TeamApi~getTeamCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Team>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Team>} and HTTP response
      */
-    getTeam(server, opts, callback) {
+    getTeamWithHttpInfo(server, opts) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'server' is set
@@ -122,17 +119,26 @@ export default class TeamApi {
       return this.apiClient.callApi(
         '/team', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the removePlayerFromTeam operation.
-     * @callback module:api/TeamApi~removePlayerFromTeamCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Team} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Returns a single Team or multiple Teams that match the filtering criteria.
+     * @param {String} server the name of the Server to filter the Teams by.
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.name the name of the Team to retrieve.
+     * @param {String} opts.tournament the name of the Tournament to filter the Teams by.
+     * @param {String} opts.day the day of the Tournament to filter the Teams by.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Team>}
      */
+    getTeam(server, opts) {
+      return this.getTeamWithHttpInfo(server, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Removes a Player from a Team
@@ -141,10 +147,9 @@ export default class TeamApi {
      * @param {String} tournament the name of the Tournament to filter the Teams by.
      * @param {String} tournamentDay the day of the Tournament to filter the Teams by.
      * @param {String} playerId the player id to remove from the Team.
-     * @param {module:api/TeamApi~removePlayerFromTeamCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Team}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Team} and HTTP response
      */
-    removePlayerFromTeam(name, serverName, tournament, tournamentDay, playerId, callback) {
+    removePlayerFromTeamWithHttpInfo(name, serverName, tournament, tournamentDay, playerId) {
       let postBody = null;
       // verify the required parameter 'name' is set
       if (name === undefined || name === null) {
@@ -188,26 +193,34 @@ export default class TeamApi {
       return this.apiClient.callApi(
         '/team', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the updateTeam operation.
-     * @callback module:api/TeamApi~updateTeamCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Team} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Removes a Player from a Team
+     * @param {String} name the name of the Team to retrieve.
+     * @param {String} serverName the name of the Server to filter the Teams by.
+     * @param {String} tournament the name of the Tournament to filter the Teams by.
+     * @param {String} tournamentDay the day of the Tournament to filter the Teams by.
+     * @param {String} playerId the player id to remove from the Team.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Team}
      */
+    removePlayerFromTeam(name, serverName, tournament, tournamentDay, playerId) {
+      return this.removePlayerFromTeamWithHttpInfo(name, serverName, tournament, tournamentDay, playerId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Updates the Team that matches the details passed.
      * @param {Object} opts Optional parameters
      * @param {module:model/UpdateTeamRequest} opts.updateTeamRequest The Team details to use to update a specific Team
-     * @param {module:api/TeamApi~updateTeamCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Team}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Team} and HTTP response
      */
-    updateTeam(opts, callback) {
+    updateTeamWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = opts['updateTeamRequest'];
 
@@ -227,8 +240,21 @@ export default class TeamApi {
       return this.apiClient.callApi(
         '/team', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * Updates the Team that matches the details passed.
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UpdateTeamRequest} opts.updateTeamRequest The Team details to use to update a specific Team
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Team}
+     */
+    updateTeam(opts) {
+      return this.updateTeamWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

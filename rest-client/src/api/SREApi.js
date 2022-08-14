@@ -34,19 +34,11 @@ export default class SREApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the getApplicationHealth operation.
-     * @callback module:api/SREApi~getApplicationHealthCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/GetApplicationHealth200Response} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
-     * @param {module:api/SREApi~getApplicationHealthCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/GetApplicationHealth200Response}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetApplicationHealth200Response} and HTTP response
      */
-    getApplicationHealth(callback) {
+    getApplicationHealthWithHttpInfo() {
       let postBody = null;
 
       let pathParams = {
@@ -65,8 +57,18 @@ export default class SREApi {
       return this.apiClient.callApi(
         '/health', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetApplicationHealth200Response}
+     */
+    getApplicationHealth() {
+      return this.getApplicationHealthWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

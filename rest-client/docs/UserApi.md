@@ -35,13 +35,12 @@ let id = "id_example"; // String | The Clash bot Player's id
 let opts = {
   'addToListOfPreferredChampionsRequest': new ClashBotRestClient.AddToListOfPreferredChampionsRequest() // AddToListOfPreferredChampionsRequest | A League of Legends Champion to updated or remove with.
 };
-apiInstance.addToListOfPreferredChampions(id, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.addToListOfPreferredChampions(id, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -84,13 +83,12 @@ let id = "id_example"; // String | The Clash bot Player's id
 let opts = {
   'createNewListOfPreferredChampionsRequest': new ClashBotRestClient.CreateNewListOfPreferredChampionsRequest() // CreateNewListOfPreferredChampionsRequest | A list of champions.
 };
-apiInstance.createNewListOfPreferredChampions(id, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.createNewListOfPreferredChampions(id, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -132,13 +130,12 @@ let apiInstance = new ClashBotRestClient.UserApi();
 let opts = {
   'createUserRequest': new ClashBotRestClient.CreateUserRequest() // CreateUserRequest | All necessary parameters to create a new Player
 };
-apiInstance.createUser(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.createUser(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -177,13 +174,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The id of the user to retrieve.
-apiInstance.getUser(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.getUser(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -223,13 +219,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The Clash bot Player's id
 let champion = "champion_example"; // String | the champion name to remove from the user's list of champions
-apiInstance.removeFromListOfPreferredChampions(id, champion, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.removeFromListOfPreferredChampions(id, champion).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -269,13 +264,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The Clash bot Player's id
-apiInstance.retrieveListOfUserPreferredChampions(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.retrieveListOfUserPreferredChampions(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -314,13 +308,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The Clash bot Player's id
-apiInstance.retrieveUserSubscriptions(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.retrieveUserSubscriptions(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -359,13 +352,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The Clash bot Player's id
-apiInstance.subscribeUser(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.subscribeUser(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -404,13 +396,12 @@ import ClashBotRestClient from 'clash-bot-rest-client';
 
 let apiInstance = new ClashBotRestClient.UserApi();
 let id = "id_example"; // String | The Clash bot Player's id
-apiInstance.unsubscribeUser(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.unsubscribeUser(id).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -451,13 +442,12 @@ let apiInstance = new ClashBotRestClient.UserApi();
 let opts = {
   'createUserRequest': new ClashBotRestClient.CreateUserRequest() // CreateUserRequest | All necessary parameters to create a new Player
 };
-apiInstance.updateUser(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.updateUser(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

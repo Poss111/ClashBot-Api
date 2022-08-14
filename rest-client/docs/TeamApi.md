@@ -28,13 +28,12 @@ let apiInstance = new ClashBotRestClient.TeamApi();
 let opts = {
   'createNewTeamRequest': {"serverName":"LoL-ClashBotSupport","tournamentName":"awesome_sauce","tournamentDay":"4","playerDetails":{"id":"1","role":"Top"}} // CreateNewTeamRequest | All necessary parameters to create a Clash Bot League of Legends Clash Team
 };
-apiInstance.createNewTeam(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.createNewTeam(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -78,13 +77,12 @@ let opts = {
   'tournament': "tournament_example", // String | the name of the Tournament to filter the Teams by.
   'day': "day_example" // String | the day of the Tournament to filter the Teams by.
 };
-apiInstance.getTeam(server, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.getTeam(server, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -130,13 +128,12 @@ let serverName = "serverName_example"; // String | the name of the Server to fil
 let tournament = "tournament_example"; // String | the name of the Tournament to filter the Teams by.
 let tournamentDay = "tournamentDay_example"; // String | the day of the Tournament to filter the Teams by.
 let playerId = "playerId_example"; // String | the player id to remove from the Team.
-apiInstance.removePlayerFromTeam(name, serverName, tournament, tournamentDay, playerId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.removePlayerFromTeam(name, serverName, tournament, tournamentDay, playerId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -181,13 +178,12 @@ let apiInstance = new ClashBotRestClient.TeamApi();
 let opts = {
   'updateTeamRequest': new ClashBotRestClient.UpdateTeamRequest() // UpdateTeamRequest | The Team details to use to update a specific Team
 };
-apiInstance.updateTeam(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.updateTeam(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

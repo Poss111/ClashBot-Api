@@ -24,13 +24,12 @@ let opts = {
   'tournament': "tournament_example", // String | The Tournament name to filter by.
   'day': "day_example" // String | The tournament day to filter by.
 };
-apiInstance.getTournaments(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.getTournaments(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

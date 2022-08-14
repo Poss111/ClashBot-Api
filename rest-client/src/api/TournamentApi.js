@@ -35,22 +35,14 @@ export default class TournamentApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the getTournaments operation.
-     * @callback module:api/TournamentApi~getTournamentsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Tournament>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * @param {Object} opts Optional parameters
      * @param {String} opts.tournament The Tournament name to filter by.
      * @param {String} opts.day The tournament day to filter by.
-     * @param {module:api/TournamentApi~getTournamentsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Tournament>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Tournament>} and HTTP response
      */
-    getTournaments(opts, callback) {
+    getTournamentsWithHttpInfo(opts) {
       opts = opts || {};
       let postBody = null;
 
@@ -72,8 +64,21 @@ export default class TournamentApi {
       return this.apiClient.callApi(
         '/tournaments', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.tournament The Tournament name to filter by.
+     * @param {String} opts.day The tournament day to filter by.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Tournament>}
+     */
+    getTournaments(opts) {
+      return this.getTournamentsWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

@@ -29,13 +29,12 @@ let opts = {
   'tournamentName': "tournamentName_example", // String | The Tournament name to filter by.
   'tournamentDay': "tournamentDay_example" // String | The Tournament day to filter by.
 };
-apiInstance.getTentativeDetails(serverName, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.getTentativeDetails(serverName, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -78,13 +77,12 @@ let apiInstance = new ClashBotRestClient.TentativeApi();
 let opts = {
   'placePlayerOnTentativeRequest': new ClashBotRestClient.PlacePlayerOnTentativeRequest() // PlacePlayerOnTentativeRequest | Parameters to place a Player into the tentative queue
 };
-apiInstance.placePlayerOnTentative(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.placePlayerOnTentative(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -126,13 +124,12 @@ let serverName = "serverName_example"; // String | the name of the Server the qu
 let playerId = "playerId_example"; // String | the player id to remove from the tentative queue with.
 let tournament = "tournament_example"; // String | the Tournament that the tentative queue belongs to.
 let tournamentDay = "tournamentDay_example"; // String | the Tournament day that the tentative queue belongs to.
-apiInstance.removePlayerFromTentative(serverName, playerId, tournament, tournamentDay, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.removePlayerFromTentative(serverName, playerId, tournament, tournamentDay).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
